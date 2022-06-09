@@ -5,8 +5,10 @@ import static ru.javarush.borets.module1.AlphabetRu.CAPACITY_ALPHABET_RU;
 import static ru.javarush.borets.module1.RussianWords.RUSSIAN_WORDS;
 
 public class CryptographerRu {
-    String textInput;
-    int offset;
+    private String textInput;
+    private int offset;
+    private static char temp = ' ';
+
 
     public CryptographerRu(String textInput, int offset) {
         this.textInput = textInput;
@@ -35,7 +37,6 @@ public class CryptographerRu {
 
         for (int i = 0; i < text.length(); i++) {
             char letter = text.charAt(i);
-            char temp = ' ';
             if (ALPHABET_RU.contains(letter)) {
                 int indexLetter = ALPHABET_RU.indexOf(letter);
                 int indexNewLetter = (indexLetter + cryptographerRu.getOffset()) % CAPACITY_ALPHABET_RU;
@@ -47,7 +48,6 @@ public class CryptographerRu {
             }
             stringBuilder.append(temp);
         }
-
         return stringBuilder.toString();
     }
 
@@ -63,12 +63,13 @@ public class CryptographerRu {
         StringBuilder resultWithAnalyze = new StringBuilder();
         StringBuilder resultAll = new StringBuilder();
         resultWithAnalyze.append("Most likely option are: \n");
+        int minOccurrenceFrequency = 2;
 
         for (int shift = 0; shift < CAPACITY_ALPHABET_RU; shift++) {
             StringBuilder stringBuilder = new StringBuilder(message.length());
             for (int i = 0; i < text.length(); i++) {
                 char letter = text.charAt(i);
-                char temp = ' ';
+
                 if (ALPHABET_RU.contains(letter)) {
                     int indexLetter = ALPHABET_RU.indexOf(letter);
                     int indexNewLetter = (indexLetter - shift) % CAPACITY_ALPHABET_RU;
@@ -80,7 +81,7 @@ public class CryptographerRu {
             }
 
             int count = analyze(stringBuilder.toString());
-            if (count > 2) {
+            if (count > minOccurrenceFrequency) {
                 resultWithAnalyze.append("number of occurrences: ").append(count).append("\n").append("ROT").append(shift).append(".")
                         .append(stringBuilder).append("\n").append("********************** \n");
 
@@ -88,7 +89,7 @@ public class CryptographerRu {
                 resultAll.append("ROT").append(shift).append(".").append(stringBuilder).append("\n");
         }
         result.append(resultWithAnalyze).append(resultAll);
-        //System.out.println(result);
+
         return result.toString();
     }
 
@@ -101,9 +102,7 @@ public class CryptographerRu {
             }
         }
         return count;
-
     }
-
 }
 
 

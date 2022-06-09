@@ -5,13 +5,18 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 import static ru.javarush.borets.module1.CryptographerRu.*;
-import static ru.javarush.borets.module1.FileInputOutput.getText;
-import static ru.javarush.borets.module1.FileInputOutput.sendTextResult;
+import static ru.javarush.borets.module1.FileInputOutput.*;
 
-public class Menu implements Validator {
+public class Menu implements ValidatorWithDialog {
     public static Scanner keyboard = new Scanner(System.in);
 
+    public static final String WRITE_RESULT_IN_FILE = "Thank you. Result will be write in" + OUTPUT_TXT;
+
+
     public static void showMenu() throws IOException {
+        String text;
+        int offset;
+
         System.out.println("************************");
         System.out.println(" Enter your choice please:");
         System.out.println();
@@ -22,24 +27,24 @@ public class Menu implements Validator {
         int choice = keyboard.nextInt();
 
         if (choice == 1) {
-            String text = getText(Path.of(Validator.pathValidation()));
-            int offset = Validator.offsetValidation();
+            text = readTextFromFile(Path.of(ValidatorWithDialog.pathValidation()));
+            offset = ValidatorWithDialog.offsetValidation();
             CryptographerRu cryptographerRu = new CryptographerRu(text, offset);
-            System.out.println("Thank you. Result will be write in output.txt");
+            System.out.println(WRITE_RESULT_IN_FILE);
             String textResult = getCryptText(cryptographerRu);
             sendTextResult(textResult);
 
         } else if (choice == 2) {
-            String text = getText(Path.of(Validator.pathValidation()));
-            int offset = Validator.offsetValidation();
+            text = readTextFromFile(Path.of(ValidatorWithDialog.pathValidation()));
+            offset = ValidatorWithDialog.offsetValidation();
             CryptographerRu cryptographerRu = new CryptographerRu(text, offset);
-            System.out.println("Thank you. Result will be write in output.txt");
+            System.out.println(WRITE_RESULT_IN_FILE);
             String textResult = decryptText(cryptographerRu);
             sendTextResult(textResult);
 
         } else if (choice == 3) {
-            String text = getText(Path.of(Validator.pathValidation()));
-            System.out.println("Result will be write in output.txt. You can change a right. Most likely option are at the top");
+            text = readTextFromFile(Path.of(ValidatorWithDialog.pathValidation()));
+            System.out.println(WRITE_RESULT_IN_FILE + "You can change a right. Most likely option are at the top");
             String textResult = decryptByBruteForce(text);
             sendTextResult(textResult);
 

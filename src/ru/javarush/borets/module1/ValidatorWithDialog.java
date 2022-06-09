@@ -6,7 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public interface Validator {
+import static ru.javarush.borets.module1.AlphabetRu.CAPACITY_ALPHABET_RU;
+import static ru.javarush.borets.module1.FileInputOutput.INPUT_TXT;
+
+public interface ValidatorWithDialog {
     static String pathValidation() throws IOException {
         System.out.println("************************");
         System.out.println("Create a file.txt and input your text there.");
@@ -35,7 +38,7 @@ public interface Validator {
             }
 
             if (!filePath.endsWith(".txt")) {
-                System.err.println("File is not format .txt. Create a file format.txt and input your text there.");
+                System.err.println("File is not format .txt. Create a file format .txt and input your text there.");
                 pathValidation();
             }
 
@@ -46,8 +49,8 @@ public interface Validator {
             return path.toString();
 
         } else if (choice == 2) {
-            if (Files.notExists(Path.of("input.txt"))) {
-                Files.createFile(Path.of("input.txt"));
+            if (Files.notExists(Path.of(INPUT_TXT))) {
+                Files.createFile(Path.of(INPUT_TXT));
             }
             System.out.println("File is created successfully.");
             System.out.println("************************");
@@ -56,7 +59,7 @@ public interface Validator {
             return null;
 
         } else if (choice == 3) {
-            return "input.txt";
+            return INPUT_TXT;
 
         } else {
             Menu.showMenu();
@@ -66,13 +69,13 @@ public interface Validator {
 
     static int offsetValidation() {
         int offset = 0;
-        System.out.println("Enter offset - the number from 1 to 33");
+        System.out.println("Enter offset - the number from 1 to" + CAPACITY_ALPHABET_RU);
 
         try {
             offset = Menu.keyboard.nextInt();
 
-            if (offset < 1 || offset > 33) {
-                System.out.println("Enter offset - the number from 1 to 33");
+            if (offset < 1 || offset > CAPACITY_ALPHABET_RU) {
+                System.out.println("Enter offset - the number from 1 to" + CAPACITY_ALPHABET_RU);
             }
         } catch (NumberFormatException e) {
             System.out.println("It is not number");
