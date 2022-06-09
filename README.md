@@ -1,26 +1,26 @@
 # cryptoanalyser
 
-Реализация шифра Цезаря на русском алфавите.
-Проект содержит 3 опции:
-1. Зашифровать текст
-2. Расшифровать текст, если известен сдвиг
-3. Расшифровать текст методом подбора сдвига, если сдвиг неизвестен
+Implementation of the Caesar cipher in the Russian alphabet.
+The project contains 3 options:
+1. Encrypt text
+2. Decipher the text if the shift is known
+3. Decipher the text using the shift selection method if the shift is unknown
 
-Общение с пользователем происходит через меню, ввод из консоли
-Текст для шифрования/расшифровки приходит из файла в формате .txt
-Результат также выводится в файл в формате .txt
-Валидация:наличие файла, расширение файла, наличие текста в файле, формат сдвига
+Communication with the user occurs through the menu, input from the console
+The text to encrypt/decrypt comes from a .txt file
+The result is also output to a file in .txt format
+Validation: presence of file, file extension, presence of text in file, shift format
 
-Способ реализации - через массив Character, в котором содержится русский алфавит.
-Этот способ был выбран, потому что реализация через индекс символа на русском алфавите не всегда работает корректно
-из-за буквы "ё".
-Логика находится в классе CryptographerRU
-Валидация - интерфейс Validator
-Общение с пользователем - класс Menu
-Опция расшифровки с анализом реализована пока в демоверсии - метод analyze
+The implementation method is through the Character array, which contains the Russian alphabet.
+This method was chosen because the implementation through the character index in the Russian alphabet does not always work correctly
+because of the letter "e".
+The logic is in the CryptographerRU class
+Validation - Validator Interface
+Communication with the user - class Menu
+The decryption option with analysis is implemented in the demo version - the analyze method
 
-Пример ввода текста для расшифровки
+Example of entering text for decryption
 Фэзыя йз зьи ахлш пвёнлш чугрщцкфнлш дцосн, жг еютзм ъгб.
-Результат:
+Result:
 съешь же ещё этих мягких французских булок  да выпей чаю 
 
